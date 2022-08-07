@@ -1,10 +1,4 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+  "Version": 1.0,
+  "UpdateDate": "2022-08-07"
 }
