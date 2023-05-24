@@ -101,7 +101,7 @@ talks.addEventListener('DOMNodeInserted', (e) => {  //开始监听dom
 })
 setInterval(() => {     //30秒发送一次消息防止房间自动关闭
     sendMessage(`欢迎使用 DRRR BOT 智能脚本\n目前脚本有如下功能:\n  1.智能Ai聊天(格式: @我+聊天内容)\n  2.点歌功能(格式: 点歌+歌曲名称)\n${new Date().toLocaleString()}`)
-},30000)
+},120000)
 function initTalks() {   //取得页面刚打开页面的talk数
     $.ajaxSettings. async = false   //同步请求
     $.getJSON('/json.php?fast=1', function(data){
