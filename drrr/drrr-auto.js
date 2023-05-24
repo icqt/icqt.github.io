@@ -3,9 +3,9 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://drrr.com/room/*
 // @grant       none
-// @version     1.11
+// @version     1.2
 // @author      阿太网络 QQ:121610059
-// @update      2020/10/24 上午11:02:03
+// @update      2023/05/24 上午11:02:03
 // ==/UserScript==
 
 /* 全局脚本配置 */
@@ -32,7 +32,7 @@ let bacc = window.innerWidth <= 414 ? '#fff' :  'rgba(255,255,255,.9)'     //手
 drrrAutoTipDiv.id = 'drrr-auto-Tip'
 drrrAutoTipDiv.style.cssText = `
     height: 25px;
-    line-height: 37px;
+    line-height: 25px;
     width: 100%;
     position: fixed;
     top: 0;
