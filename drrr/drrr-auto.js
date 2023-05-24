@@ -5,7 +5,7 @@
 // @grant       none
 // @version     1.1
 // @author      阿太网络 QQ:121610059
-// @update      2023/05/24 下午17:30:03
+// @update      2020/10/24 上午11:02:03
 // ==/UserScript==
 
 /* 全局脚本配置 */
@@ -27,8 +27,8 @@ div.style.cssText = `
     border-bottom-right-radius: 6px;
     cursor: pointer;`
 document.body.appendChild(div)  //插入到网页中
-
 let drrrAutoTipDiv = document.createElement('div')    //创建一个脚本全局提示div
+let bacc = window.innerWidth <= 414 ? '#fff' :  'rgba(255,255,255,.9)'     //手机访问改变输入框的背景色
 drrrAutoTipDiv.id = 'drrr-auto-Tip'
 drrrAutoTipDiv.style.cssText = `
     height: 25px;
@@ -41,11 +41,10 @@ drrrAutoTipDiv.style.cssText = `
     color: #000;
     font-size: 14px;
     font-weight:bold;
-    background-color: rgba(255,255,255,.9);`
+    background-color: ${bacc};`
 document.body.appendChild(drrrAutoTipDiv)  //插入到网页中
 let drrrAutoSwitch = document.querySelector('#drrr-auto-switch')
 let drrrAutoTip = document.querySelector('#drrr-auto-Tip')
-
 document.querySelector('.message_box').style.top = '25px'   //默认输入框往下挪
 if (localStorage.getItem('drrrAutoSwitch') === 'true') {   //初启动后判断一下脚本开启状态
     drrrAutoSwitch.style.backgroundColor = '#7dc555'    //调整背景颜色为绿色
