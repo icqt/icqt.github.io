@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://drrr.com/room/*
 // @grant       none
-// @version     1.2
+// @version     1.20
 // @author      阿太网络 QQ:121610059
 // @update      2023/05/24 上午11:02:03
 // ==/UserScript==
