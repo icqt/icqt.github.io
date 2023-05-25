@@ -6,7 +6,7 @@
 // @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js
 // @license     MIT
 // @grant       none
-// @version     1.22
+// @version     1.23
 // @author      QQ:121610059
 // @update      2023-05-25 11:36:30
 // ==/UserScript==
