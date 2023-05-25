@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name       DRRR.COM智能脚本 - 自动对话 - 自动点歌
+// @name        DRRR.COM智能脚本 - 自动对话 - 自动点歌
+// @description DRRR.COM智能脚本 - 自动对话 - 自动点歌
 // @namespace   Violentmonkey Scripts
 // @match       https://drrr.com/room/*
-// @grant       MIT
+// @license     MIT
+// @grant       none
 // @version     1.20
 // @author      QQ:121610059
-// @update      2023/05/24 上午11:02:03
+// @update      2023-05-25 11:36:30
 // ==/UserScript==
 
 /* 全局脚本配置 */
