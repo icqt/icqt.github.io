@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        DRRR.COM智能脚本 - 自动对话 - 自动点歌
-// @description DRRR.COM智能脚本 - 自动对话 - 自动点歌
+// @description 让DRRR.COM聊天室支持点歌、智能聊天功能
 // @namespace   Violentmonkey Scripts
 // @match       https://drrr.com/room/*
 // @license     MIT
