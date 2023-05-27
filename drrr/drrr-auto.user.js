@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 /* 全局脚本配置 */
-const apiAdress = 'https://api.ataisoft.533526.top/drrrAuto'
+const apiAdress = 'https://api.533526.top/drrrAuto'
 localStorage.setItem('drrrAutoSwitch', 'true')     //默认脚本是否开启 true为打开 false为关闭
 localStorage.removeItem('selfName')     //清除机器人名字
 /* 全局配置结束 */
