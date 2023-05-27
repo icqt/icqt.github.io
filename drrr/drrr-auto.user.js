@@ -5,7 +5,7 @@
 // @match       https://drrr.com/room/*
 // @license     MIT
 // @grant       none
-// @version     1.24
+// @version     1.25
 // @author      QQ:121610059
 // @update      2023-05-25 11:36:30
 // ==/UserScript==
