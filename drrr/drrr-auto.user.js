@@ -3,7 +3,6 @@
 // @description 让DRRR.COM聊天室支持点歌、智能聊天功能
 // @namespace   Violentmonkey Scripts
 // @match       https://drrr.com/room/*
-// @require     https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js
 // @license     MIT
 // @grant       none
 // @version     1.23
