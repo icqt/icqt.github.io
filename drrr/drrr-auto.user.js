@@ -9,9 +9,9 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.04
+// @version     2.05
 // @author      QQ:121610059
-// @update      2023-06-06 08:02:31
+// @update      2023-06-06 09:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
 // ==/UserScript==
 
@@ -23,7 +23,7 @@
     // 设置默认欢迎文本
     const welcome_text = '欢迎{username}进入聊天室'
     // 设置定时发送默认间隔时间
-    const interval_time = 240
+    const interval_time = 60
     // 设置定时发送的文本
     const timer_str = '你好,现在时间是{time}'
 
@@ -105,6 +105,13 @@
             padding: 5px;
        }
        
+       .layui-layer-content .user-items div{
+            display: inline-block;
+            width:50%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+       }
     `)
 
     // **添加drr-auto面板元素
@@ -192,14 +199,29 @@
                 area: ['200px', '250px'],
                 id: 'config_layer',
                 content: `
-                <button id="welcome_text">设置欢迎文本</button>
-                <button id="timer_num">设置定时间隔</button>
-                <button id="timer_text">设置定时文本</button>`
+                <button>设置房间管理</button>
+                <button>设置欢迎文本</button>
+                <button>设置定时间隔</button>
+                <button>设置定时文本</button>`
             });
         }
         // 配置项点击事件绑定
         if (e.target.parentNode.id === 'config_layer') {
             switch (e.target.innerText) {
+                case '设置房间管理':
+                    let str = ''
+                    for (let i = 0; i < room.users.length; i++) {
+                        str += `<div data-id="${room.users[i].id}">${room.users[i].name}</div><div><a href="javascript:" id="set_admin">设为管理员</a></div>`
+                    }
+                    layer.open({
+                        type: 1,
+                        title: '选择用户',
+                        //area: ['350px'],
+                        content: `<div style="padding: 11px;color: #000;text-align: center;">
+                        <div class="user-items">${str}</div>
+                        </div>`
+                    });
+                    break
                 case '设置欢迎文本':
                     layer.prompt({
                         title: e.target.innerText,
@@ -243,6 +265,13 @@
                     break
             }
         }
+        // 设置管理员
+        if (e.target.id === 'set_admin') {
+            let id = e.target.parentElement.previousElementSibling.dataset.id
+            let name = e.target.parentElement.previousElementSibling.textContent
+            GM_setValue('admin_id', id)
+            layer.msg(`已设置${name}为管理员`)
+        }
     })
 
     // 拦截drrr消息
@@ -276,8 +305,10 @@
                             // 接收新消息
                             let content = element.message || element.content
                             let username = element.from.name
+                            let id = element.from.id
                             console.log(`用户: ${username}`)
                             console.log(`信息: ${content}`)
+                            console.log(`ID: ${id}`)
                             // 点歌功能
                             if (song_checkbox.checked && content.includes('点歌') && content.length > 2) {
                                 let song_name = content.replace('点歌', '').trim()
@@ -287,6 +318,14 @@
                             if (chat_checkbox.checked && content.includes(`@${profile.name}`) && content.length > 1) {
                                 let ask_content = content.replace(`@${profile.name}`, '').trim()
                                 chat(username, ask_content)
+                            }
+                            // 管理员功能
+                            if(GM_getValue('admin_id') && GM_getValue('admin_id') === id){
+                                switch (content) {
+                                    case '切歌':
+                                        Player.nowPlaying.howl.stop()
+                                    break
+                                }
                             }
                             break
                     }
