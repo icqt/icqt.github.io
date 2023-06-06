@@ -366,7 +366,7 @@
                                         Player.nowPlaying.howl.pause()
                                         Player.isPausing = true
                                     }else{
-                                        sendMessage(`当前模式仅支持管理员切歌功能, 目前管理员为${GM_setValue('admin_name', '暂未设置管理员')}.`)
+                                        sendMessage(`当前模式仅支持管理员切歌功能, 目前管理员为${GM_getValue('admin_name','暂未设置管理员')}.`)
                                     }
                                 }else{
                                     Player.nowPlaying.howl.pause()
