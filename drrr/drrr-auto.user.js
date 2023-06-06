@@ -9,7 +9,7 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.4
+// @version     2.5.5
 // @author      QQ:121610059
 // @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
@@ -237,7 +237,6 @@
                     break
                 case '设置随机音乐':
                     let random_music_lists = GM_getValue('random_music_lists', [])
-                    console.log(random_music_lists)
                     layer.prompt({
                         title: e.target.innerText,
                         value: random_music_lists.join('\n'),
@@ -289,6 +288,7 @@
             let id = e.target.parentElement.previousElementSibling.dataset.id
             let name = e.target.parentElement.previousElementSibling.textContent
             GM_setValue('admin_id', id)
+            sendMessage(`已设置${name}为管理员`)
             layer.msg(`已设置${name}为管理员`)
         }
     })
@@ -343,6 +343,7 @@
                                 switch (content) {
                                     case '切歌':
                                         Player.nowPlaying.howl.pause()
+                                        Player.isPausing
                                     break
                                 }
                             }
