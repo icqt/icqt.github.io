@@ -323,7 +323,7 @@
                             if(GM_getValue('admin_id') && GM_getValue('admin_id') === id){
                                 switch (content) {
                                     case '切歌':
-                                        Player.nowPlaying.howl.stop()
+                                        Player.nowPlaying.howl.pause()
                                     break
                                 }
                             }
