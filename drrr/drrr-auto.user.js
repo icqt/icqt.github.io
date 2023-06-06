@@ -11,7 +11,7 @@
 // @runat      document-end
 // @version     2.04
 // @author      QQ:121610059
-// @update      2023-0606 08:02:31
+// @update      2023-06-06 08:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
 // ==/UserScript==
 
@@ -23,7 +23,7 @@
     // 设置默认欢迎文本
     const welcome_text = '欢迎{username}进入聊天室'
     // 设置定时发送默认间隔时间
-    const interval_time = 60
+    const interval_time = 240
     // 设置定时发送的文本
     const timer_str = '你好,现在时间是{time}'
 
