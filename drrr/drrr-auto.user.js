@@ -9,7 +9,7 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.5
+// @version     2.5.6
 // @author      QQ:121610059
 // @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
@@ -304,6 +304,7 @@
                 if (talks.length <= 0) return
                 talks.forEach((element, index) => {
                     if (element.is_me) return
+                    console.log(element)
                     switch (element.type) {
                         case 'join':
                             console.log('收到用户加入信息')
@@ -315,6 +316,9 @@
                             break
                         case 'leave':
                             console.log('收到用户退出信息')
+                            break
+                        case 'user-profile':
+                            console.log('收到用户加入退出信息')
                             break
                         case 'music':
                             console.log('收到音乐消息')
@@ -337,6 +341,13 @@
                             if (chat_checkbox.checked && content.includes(`@${profile.name}`) && content.length > 1) {
                                 let ask_content = content.replace(`@${profile.name}`, '').trim()
                                 chat(username, ask_content)
+                            }
+                            // 查看歌单
+                            if (content === '查看队列'){
+                                console.log(play_list_array.length)
+                                if (play_list_array.length > 0) {
+                                    sendMessage(`播放队列:\n${play_list_array.join('\n')}`)
+                                }
                             }
                             // 管理员功能
                             if(GM_getValue('admin_id') && GM_getValue('admin_id') === id){
@@ -466,7 +477,7 @@
                 console.log(play_list_array)
                 return
             }else{
-                let random_music_lists = GM_getValue('random_music_lists1',['稻香','花海','一路向北','蒲公英的约定'])
+                let random_music_lists = GM_getValue('random_music_lists',['稻香','花海','一路向北','蒲公英的约定'])
                 let random_num = Math.floor(Math.random() * random_music_lists.length)
                 song(random_music_lists[random_num]).then(() => {
                     setTimeout(() => geting = false, 3000)
