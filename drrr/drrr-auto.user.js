@@ -9,7 +9,7 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.10
+// @version     2.5.11
 // @author      QQ:121610059
 // @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
@@ -391,7 +391,7 @@
         // 当前音乐在播放的话就加入队列
         if(song_list_checkbox.checked && !Player.isPausing){
             play_list_array.push(keyword)
-            let str = `${keyword}已加入队列,排第${play_list_array.lastIndexOf(keyword)+1}位,发送" 查看队列 "查看当前播报列表`
+            let str = `${keyword}已加入队列,排第${play_list_array.lastIndexOf(keyword)+1}位.\n发送"查看队列"可以查看当前播报列表.`
             console.log(`提示: ${str}`)
             sendMessage(str)
             return
