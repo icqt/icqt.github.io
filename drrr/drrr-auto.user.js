@@ -9,7 +9,7 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.11
+// @version     2.5.12
 // @author      QQ:121610059
 // @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
@@ -120,6 +120,7 @@
     drrr_auto_panel.innerHTML = `
     <div id="drrr-auto-content">
         <div class="items"><input type="checkbox" id="song_checkbox"><span>点歌功能</span></div>
+        <div class="items"><input type="checkbox" id="admin_hand_checkbox"><span>管理员切歌</span></div>
         <div class="items"><input type="checkbox" id="song_list_checkbox"><span>点歌队列</span></div>
         <div class="items"><input type="checkbox" id="auto_song_checkbox"><span>自动点歌</span></div>
         <div class="items"><input type="checkbox" id="chat_checkbox"><span>智能聊天</span></div>
@@ -130,6 +131,8 @@
 
     // 点歌checkbox
     const song_checkbox = document.querySelector('#song_checkbox')
+    // 管理员切歌checkbox
+    const admin_hand_checkbox = document.querySelector('#admin_hand_checkbox')
     // 点歌队列checkbox
     const song_list_checkbox = document.querySelector('#song_list_checkbox')
     // 自动点歌checkbox
@@ -143,6 +146,7 @@
 
     // 设置checkbox选中状态
     GM_getValue('song_checkbox', false) ? song_checkbox.checked = true : song_checkbox.checked = false
+    GM_getValue('admin_hand_checkbox', true) ? admin_hand_checkbox.checked = true : admin_hand_checkbox.checked = false
     GM_getValue('song_list_checkbox', false) ? song_list_checkbox.checked = true : song_list_checkbox.checked = false
     GM_getValue('auto_song_checkbox', false) ? auto_song_checkbox.checked = true : auto_song_checkbox.checked = false
     GM_getValue('chat_checkbox', false) ? chat_checkbox.checked = true : chat_checkbox.checked = false
@@ -173,6 +177,9 @@
             switch (e.target.innerText) {
                 case '点歌功能':
                     layer.tips('让聊天室支持点歌功能 格式: 点歌+歌曲名', e.target, {tips: 3})
+                    break
+                case '管理员切歌':
+                    layer.tips('打开此功能后只有管理员可以切歌', e.target, {tips: 3})
                     break
                 case '点歌队列':
                     layer.tips('让点歌功能支持队列,而不是直接切换歌曲', e.target, {tips: 3})
@@ -288,6 +295,7 @@
             let id = e.target.parentElement.previousElementSibling.dataset.id
             let name = e.target.parentElement.previousElementSibling.textContent
             GM_setValue('admin_id', id)
+            GM_setValue('admin_name', name)
             sendMessage(`已设置${name}为管理员`)
             layer.msg(`已设置${name}为管理员`)
         }
@@ -351,13 +359,26 @@
                                     sendMessage(`当前队列内暂无歌曲哦~`)
                                 }
                             }
-                            // 管理员功能
+                            // 切歌功能
+                            if (content === '切歌'){
+                                if (GM_getValue('admin_hand_checkbox',true)){
+                                    if (GM_getValue('admin_id') && GM_getValue('admin_id') === id){
+                                        Player.nowPlaying.howl.pause()
+                                        Player.isPausing = true
+                                    }else{
+                                        sendMessage(`当前模式仅支持管理员切歌功能, 目前管理员为${GM_setValue('admin_name', '暂未设置管理员')}.`)
+                                    }
+                                }else{
+                                    Player.nowPlaying.howl.pause()
+                                    Player.isPausing = true
+                                }
+                            }
                             if(GM_getValue('admin_id') && GM_getValue('admin_id') === id){
                                 switch (content) {
                                     case '切歌':
                                         Player.nowPlaying.howl.pause()
                                         Player.isPausing = true
-                                    break
+                                        break
                                 }
                             }
                             break
