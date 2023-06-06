@@ -9,9 +9,9 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.2
+// @version     2.5.3
 // @author      QQ:121610059
-// @update      2023-06-06 09:02:31
+// @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
 // ==/UserScript==
 
@@ -196,10 +196,11 @@
             layer.open({
                 type: 1,
                 title: '更多配置',
-                area: ['200px', '250px'],
+                area: ['200px'],
                 id: 'config_layer',
                 content: `
                 <button>设置房间管理</button>
+                <button>设置随机音乐</button>
                 <button>设置欢迎文本</button>
                 <button>设置定时间隔</button>
                 <button>设置定时文本</button>`
@@ -230,6 +231,24 @@
                         btn: ['保存', '退出'],
                     }, function (text, index) {
                         GM_setValue('welcome_text', text)
+                        layer.close(index)
+                        layer.msg('保存成功')
+                    })
+                    break
+                case '设置随机音乐':
+                    let random_music_lists = GM_getValue('random_music_lists', [])
+                    console.log(random_music_lists)
+                    layer.prompt({
+                        title: e.target.innerText,
+                        value: random_music_lists.join('\n'),
+                        formType: 2,
+                        area:['96vw', '96vh'],
+                        btn: ['保存', '退出'],
+                    }, function (text, index) {
+                        let random_music_lists_array = text.split('\n').filter(function (string) {
+                            return string && string.trim()
+                        })
+                        GM_setValue('random_music_lists', random_music_lists_array)
                         layer.close(index)
                         layer.msg('保存成功')
                     })
@@ -324,7 +343,6 @@
                                 switch (content) {
                                     case '切歌':
                                         Player.nowPlaying.howl.pause()
-                                        Player.isPausing = true
                                     break
                                 }
                             }
@@ -447,18 +465,10 @@
                 console.log(play_list_array)
                 return
             }else{
-                $.ajax({
-                    'url': 'https://api.533526.top/drrrAuto/?action=getRandomMusicName',
-                    'type': 'get',
-                    'dataType': 'json',
-                    'async': false,
-                    success: function (res) {
-                        if (res.code === 1) {
-                            song(res.data.songName).then(() => {
-                                setTimeout(() => geting = false, 3000)
-                            })
-                        }
-                    }
+                let random_music_lists = GM_getValue('random_music_lists1',['稻香','花海','一路向北','蒲公英的约定'])
+                let random_num = Math.floor(Math.random() * random_music_lists.length)
+                song(random_music_lists[random_num]).then(() => {
+                    setTimeout(() => geting = false, 3000)
                 })
             }
         }
