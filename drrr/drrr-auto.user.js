@@ -9,9 +9,9 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.03
+// @version     2.04
 // @author      QQ:121610059
-// @update      2023-06-4 14:02:31
+// @update      2023-0606 08:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
 // ==/UserScript==
 
@@ -35,21 +35,14 @@
         .room-input-wrap,
         .room-submit-wrap,
         #talks{
-            display:none;
+            //display:none;
         }
         #drrr-auto-panel{
             font-weight: bold;
-            display: flex;
-            justify-content: center;
-            height: 96vh;
-            position: relative;
-            z-index: 9999;
-            color: #fff;
         }
         #drrr-auto-content{
             display: flex;
             align-content: center;
-            flex-direction: column;
             justify-content: center;
             flex-wrap: wrap;
             align-items: flex-start;
@@ -116,7 +109,7 @@
 
     // **添加drr-auto面板元素
     const message_box_effect_wraper = document.querySelector('.message_box_effect_wraper')
-    const drrr_auto_panel = GM_addElement(document.body, 'div', {id: 'drrr-auto-panel'})
+    const drrr_auto_panel = GM_addElement(document.querySelector('.message_box_effect_wraper'), 'div', {id: 'drrr-auto-panel'})
     drrr_auto_panel.innerHTML = `
     <div id="drrr-auto-content">
         <div class="items"><input type="checkbox" id="song_checkbox"><span>点歌功能</span></div>
@@ -180,7 +173,7 @@
                 case '自动点歌':
                     layer.tips('让聊天室没有音乐播放时自动播放随机音乐', e.target, {tips: 3})
                     break
-                case 'AI聊天':
+                case '智能聊天':
                     layer.tips('简单聊天功能 格式: @BOT+想说的话', e.target, {tips: 3})
                     break
                 case '欢迎加入':
