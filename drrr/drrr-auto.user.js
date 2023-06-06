@@ -9,7 +9,7 @@
 // @grant       GM_getValue
 // @grant       GM_addElement
 // @runat      document-end
-// @version     2.5.13
+// @version     2.5.14
 // @author      QQ:121610059
 // @update      2023-06-06 14:02:31
 // @supportURL  https://greasyfork.org/zh-CN/scripts/414535-drrr-com%E6%99%BA%E8%83%BD%E8%84%9A%E6%9C%AC-%E8%87%AA%E5%8A%A8%E5%AF%B9%E8%AF%9D-%E8%87%AA%E5%8A%A8%E7%82%B9%E6%AD%8C
@@ -361,7 +361,7 @@
                             }
                             // 切歌功能
                             if (content === '切歌'){
-                                if (GM_getValue('admin_hand_checkbox',true)){
+                                if (admin_hand_checkbox.checked){
                                     if (GM_getValue('admin_id') && GM_getValue('admin_id') === id){
                                         Player.nowPlaying.howl.pause()
                                         Player.isPausing = true
